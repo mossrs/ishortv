@@ -1,0 +1,11 @@
+spring:
+  # 这个还是需要写的 指定当前环境
+  profiles:
+    active: prod
+  application:
+    name: ishortv_userservice
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+      discovery:
+        server-addr: 127.0.0.1:8848

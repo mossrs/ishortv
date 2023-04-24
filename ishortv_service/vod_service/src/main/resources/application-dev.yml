@@ -1,0 +1,69 @@
+server:
+  port: 8083
+
+spring:
+  main:
+    banner-mode: off
+  datasource:
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+      username: 
+      password: 
+  # 一般统一规定前端传来的时间格式化字符串 因此配置此项
+  mvc:
+    format:
+      date-time: yyyy-MM-dd HH:mm:ss
+      date: yyyy-MM-dd
+      time: HH:mm:ss
+  # 此项是配置项目json与对象之间转换问题 但我们一版新建一个ObjectMapper来配置java对象与json之间的转换
+  jackson:
+    locale: zh_CN
+    time-zone: GMT+8
+  servlet:
+    multipart:
+      max-file-size: 200MB
+      max-request-size: 200MB
+
+  redis:
+    port: 6379
+    host: localhost
+    database: 0
+
+mybatis-plus:
+  type-aliases-package: com.mossflower.*.entity
+  mapper-locations: classpath*:com/gitee/sunchenbin/mybatis/actable/mapping/*/*.xml, classpath*:com/mossflower/*/mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    banner: false
+    db-config:
+      table-underline: true
+      id-type: auto
+      table-prefix: t_
+
+
+# actable配置
+actable:
+  table:
+    auto: update
+  model:
+    pack: com.mossflower.vod_service.entity
+  database:
+    type: mysql
+
+# 日志
+logging:
+  level:
+    root: info
+  logback:
+    rollingpolicy:
+      file-name-pattern: logs/app-%d-%i.log
+      max-history: 15
+      max-file-size: 100MB
+  file:
+    name: logs/app.log
+
+ffmpeg:
+  path: 

@@ -1,0 +1,59 @@
+server:
+  port: 8082
+
+spring:
+  main:
+    banner-mode: off
+  datasource:
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://:3306/?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+      username: 
+      password: 
+  mvc:
+    format:
+      date-time: yyyy-MM-dd HH:mm:ss
+      date: yyyy-MM-dd
+      time: HH:mm:ss
+  jackson:
+    locale: zh_CN
+    time-zone: GMT+8
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  redis:
+    port: 6379
+    host: 127.0.0.1
+    database: 0
+
+mybatis-plus:
+  type-aliases-package: com.mossflower.*.entity
+  mapper-locations: classpath*:com/gitee/sunchenbin/mybatis/actable/mapping/*/*.xml, classpath*:com/mossflower/*/mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    banner: false
+    db-config:
+      table-underline: true
+      id-type: auto
+      table-prefix: t_
+
+actable:
+  table:
+    auto: update
+  model:
+    pack: com.mossflower.user_service.entity
+  database:
+    type: mysql
+
+logging:
+  level:
+    root: info
+  logback:
+    rollingpolicy:
+      file-name-pattern: logs/app-%d-%i.log
+      max-history: 15
+      max-file-size: 100MB
+  file:
+    name: logs/app.log

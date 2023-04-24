@@ -1,0 +1,32 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /ishortv
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: ishortv_userservice
+          uri: http://127.0.0.1:8082
+          predicates:
+            - Path=/*/user/**
+          filters:
+            - StripPrefix=1
+        - id: ishortv_vodservice
+          uri: http://127.0.0.1:8083
+          predicates:
+            - Path=/*/vod/**
+          filters:
+            - StripPrefix=1
+
+logging:
+  level:
+    root: info
+  logback:
+    rollingpolicy:
+      file-name-pattern: logs/app-%d-%i.log
+      max-history: 15
+      max-file-size: 100MB
+  file:
+    name: /logs/app.log
